@@ -8,12 +8,19 @@ const interviewSchema = new mongoose.Schema(
         },
         date: {
             type: Date,
+            required: true,
             default: new Date(),
         },
-        student: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Student',
+        description: {
+            type: String,
+            default: 'An good IT company.'
         },
+        student: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Student',
+            },
+        ],
     },
     {
         timestamps: true,

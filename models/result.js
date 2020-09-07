@@ -12,7 +12,7 @@ const resultSchema = new mongoose.Schema(
         },
         result: {
             type: String,
-            enum: ['pass', 'fail', 'hold', "didn't attempt"],
+            enum: ['pass', 'fail', 'on hold', "didn't attempt"],
         },
     },
     {

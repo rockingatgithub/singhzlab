@@ -1,0 +1,33 @@
+<h3><%= student.name%></h3>
+<h4><%= student.email%></h4>
+<h5><%= student.batch%></h5>
+<p>
+    <span
+        >DSA Score: <%if(student.course === undefined){%> 0 <%}else{%> <%=
+        student.course.dsa%> <%}%>
+    </span>
+    <span
+        >WebD Score: <%if(student.course === undefined){%> 0 <%}else{%> <%=
+        student.course.webd%> <%}%>
+    </span>
+    <span
+        >DSA Score: <%if(student.course === undefined){%> 0 <%}else{%> <%=
+        student.course.dsa%> <%}%>
+    </span>
+</p>
+
+<form action="/courses/addScore/<%= student.id%>" method="POST">
+    <label for="dsa-score">
+        DSA Score:
+        <input type="number" name="dsa" id="dsa-score" required />
+    </label>
+    <label for="webd-score">
+        WebD Score:
+        <input type="number" name="webd" id="webd-score" required />
+    </label>
+    <label for="react-score">
+        React Score:
+        <input type="number" name="react" id="react-score" required />
+    </label>
+    <input type="submit" value="Submit" placeholder="Submit" />
+</form>

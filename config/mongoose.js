@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-mongoose.connect(`mongodb://localhost/singhzlab`, { useUnifiedTopology: true })
+mongoose.connect(`mongodb://localhost/singhzlab`, {
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+})
 
 const db = mongoose.connection
 

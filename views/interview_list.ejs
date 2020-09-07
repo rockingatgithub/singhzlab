@@ -1,0 +1,21 @@
+<h1><%= comp.company%></h1>
+<p>
+    <small> <%= comp.date.toString().substring(0,16)%> </small>
+    <sapn> <%= comp.description%> </sapn>
+</p>
+
+<%for(student of comp.student){%> <%- include('students_list') -%> <%}%>
+
+<form action="/interviews/addCandidate/<%= comp.id%>" method="POST">
+    <label for="student-email">
+        Students Email:
+        <input
+            type="email"
+            name="email"
+            id="student-email"
+            placeholder="Enter student's email"
+            required
+        />
+    </label>
+    <input type="submit" value="Submit" placeholder="Submit" />
+</form>

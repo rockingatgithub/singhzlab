@@ -1,0 +1,32 @@
+<h3>
+    <%= student.name%>
+</h3>
+<h4>
+    <%= student.email%>
+</h4>
+<h5>
+    <%= student.batch%>
+</h5>
+<p>
+    Result for this interview:- 
+    <form action="/results/addResult?interview=<%= comp.id%>&candidate=<%= student.id%>" method="POST">
+        <label for="result">
+            <select id="result" name="result">
+                <option value="pass">
+                    Pass
+                </option>
+                <option value="fail">
+                    Fail
+                </option>
+                <option value="on hold">
+                    On Hold
+                </option>
+                <option value="didn't attempt">
+                    Didn't Attempt
+                </option>
+            </select>
+        </label>
+        <input type="submit" value="Submit" placeholder="Submit" />
+    </form>
+
+</p>
