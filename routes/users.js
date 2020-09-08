@@ -12,6 +12,8 @@ router.post(
     userController.createSession
 )
 
+router.get('/signout', userController.destroySession)
+
 router.post('/create', userController.create)
 router.get('/createCsv', userController.createCsv)
 router.get('/downloadCsv', userController.downloadCsv)

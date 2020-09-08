@@ -1,12 +1,14 @@
-<h3>
-    <%= student.name%>
-</h3>
-<h4>
-    <%= student.email%>
-</h4>
+
+<li class="list-group-item">
 <h5>
-    <%= student.batch%>
+    <%= student.name%>
 </h5>
+<h5>
+    <%= student.email%>
+</h5>
+<h6>
+    <%= student.batch%>
+</h6>
 <p>
     Result for this interview:- 
     <form action="/results/addResult?interview=<%= comp.id%>&candidate=<%= student.id%>" method="POST">
@@ -30,3 +32,4 @@
     </form>
 
 </p>
+</li>

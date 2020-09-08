@@ -21,6 +21,13 @@ module.exports.signup = function (req, res) {
     return res.render('signup', {})
 }
 
+//to logout users..
+module.exports.destroySession = function (req, res) {
+    req.logout()
+
+    return res.redirect('/')
+}
+
 module.exports.createSession = function (req, res) {
     return res.redirect('/')
 }
@@ -77,37 +84,43 @@ module.exports.createCsv = async function (req, res) {
         async function modify(student) {
             student.interview.map(modifyAgain)
             async function modifyAgain(interviewObj) {
-                let resultObj = await Result.findOne({
-                    student: student._id,
-                    interview: interviewObj._id,
-                })
+                try {
+                    let resultObj = await Result.findOne({
+                        student: student._id,
+                        interview: interviewObj._id,
+                    })
 
-                let course = await Course.findOne({
-                    student: student._id,
-                })
+                    let course = await Course.findOne({
+                        student: student._id,
+                    })
 
-                const { _id, name, batch, college, status } = student
-                const { dsa, webd, react } = course
-                const { company, date } = interviewObj
-                const { result } = resultObj
+                    const { _id, name, batch, college, status } = student
+                    const { dsa, webd, react } = course
+                    const { company, date } = interviewObj
 
-                let obj = {
-                    _id,
-                    name,
-                    batch,
-                    college,
-                    status,
-                    dsa,
-                    webd,
-                    react,
-                    company,
-                    date,
-                    result,
+                    const { result } = resultObj
+
+                    let obj = {
+                        _id,
+                        name,
+                        batch,
+                        college,
+                        status,
+                        dsa,
+                        webd,
+                        react,
+                        company,
+                        date,
+                        result,
+                    }
+                    // console.log(obj)
+                    newModifiedArray.push(obj)
+                    // console.log(newModifiedArray[newModifiedArray.length - 1])
+                    await csvWriter.writeRecords(newModifiedArray)
+                } catch (err) {
+                    console.log('Error is', err)
+                    return
                 }
-                // console.log(obj)
-                newModifiedArray.push(obj)
-                // console.log(newModifiedArray[newModifiedArray.length - 1])
-                await csvWriter.writeRecords(newModifiedArray)
             }
         }
 

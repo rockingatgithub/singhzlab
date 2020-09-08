@@ -1,72 +1,111 @@
-<h1>Hello there!</h1>
+<h2 id="main-heading">SighzLab</h2>
 
+<%if(!locals.user){%>
+<a href="/users/signin"> Signin </a>
+<a href="/users/signup"> Signup </a>
+<%}else{%>
+<a href="/users/signout"> Sign out</a>
 <p>
     Create CSV of all data:
     <a href="/users/createCsv"> CreateCsv </a>
-
+    <br />
     Download CSV of all data:
     <a href="/users/downloadCsv"> DownloadCsv </a>
 </p>
 
+<p>
+    <a href="/students/list"> View All Students</a>
+</p>
+
+<h4 id="student-heading">Add Students</h4>
 <form action="/students/create" method="POST">
-    <label for="name">
-        Name:
-        <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="Enter student name"
-            required
-        />
-    </label>
-    <label for="email">
-        Email:
-        <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Enter student email"
-            required
-        />
-    </label>
-    <label for="batch">
-        Batch:
-        <input
-            id="batch"
-            type="radio"
-            name="batch"
-            value="Weekday"
-            placeholder="Weekday"
-            checked
-        />
-        <input
-            id="batch"
-            type="radio"
-            name="batch"
-            placeholder="Weekend"
-            value="Weekend"
-        />
-    </label>
-    <label for="college">
-        College:
-        <input
-            id="college"
-            type="text"
-            name="college"
-            placeholder="Enter student college"
-            required
-        />
-    </label>
-    <label for="status">
-        Placement Status:
-        <select name="status" id="status">
-            <option value="placed">Placed</option>
-            <option value="not_placed">Not Placed</option>
-        </select>
-    </label>
-    <input type="submit" value="Submit" placeholder="Submit" />
+    <div class="form-group">
+        <label for="name">
+            Name:
+            <input
+                id="name"
+                class="form-control"
+                type="text"
+                name="name"
+                placeholder="Enter student name"
+                required
+            />
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="email">
+            Email:
+            <input
+                id="email"
+                class="form-control"
+                type="email"
+                name="email"
+                placeholder="Enter student email"
+                required
+            />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label for="batch">
+            Batch: Weekday<input
+                id="batch"
+                class="form-control"
+                type="radio"
+                name="batch"
+                value="Weekday"
+                placeholder="Weekday"
+                checked
+            />
+            Weekend<input
+                id="batch"
+                type="radio"
+                class="form-control"
+                name="batch"
+                placeholder="Weekend"
+                value="Weekend"
+            />
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="college">
+            College:
+            <input
+                id="college"
+                class="form-control"
+                type="text"
+                name="college"
+                placeholder="Enter student college"
+                required
+            />
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="status">
+            Placement Status:
+            <select name="status" id="status" class="form-control">
+                <option value="placed">Placed</option>
+                <option value="not_placed">Not Placed</option>
+            </select>
+        </label>
+    </div>
+
+    <input
+        type="submit"
+        value="Submit"
+        placeholder="Submit"
+        class="btn btn-primary"
+    />
 </form>
 
+<div style="margin-top: 10px">
+    <a href="/interviews/list"> Get Interview List </a>
+</div>
+<div style="margin-top: 10px">
+    <a href="/interviews/otherList"> Get Off Campus Interview List </a>
+</div>
+
+<h4 id="interview-heading">Add Interview</h4>
 <form action="/interviews/create" method="POST">
     <label for="name">
         Company:
@@ -78,6 +117,7 @@
             required
         />
     </label>
+    <br />
     <label for="date">
         Date:
         <input
@@ -88,6 +128,7 @@
             required
         />
     </label>
+    <br />
     <label for="description">
         Description:
         <textarea
@@ -96,8 +137,13 @@
             value="An IT company."
         ></textarea>
     </label>
-    <input type="submit" value="Submit" placeholder="Submit" />
+    <br />
+    <input
+        type="submit"
+        value="Submit"
+        placeholder="Submit"
+        class="btn btn-primary"
+    />
 </form>
 
-<%for(student of students){%> <%- include('student_profile') -%> <%}%>
-<%for(comp of companies){%> <%- include('interview_list') -%> <%}%>
+<%}%>

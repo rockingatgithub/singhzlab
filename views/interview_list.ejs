@@ -1,21 +1,38 @@
-<h1><%= comp.company%></h1>
-<p>
-    <small> <%= comp.date.toString().substring(0,16)%> </small>
-    <sapn> <%= comp.description%> </sapn>
-</p>
+<h4>Students applied for interview</h4>
+<div id="companies-list">
+    <ul class="list-group">
+        <%for(comp of companies){%>
+        <li class="list-group-item">
+            <h5><%= comp.company%></h5>
+            <p>
+                <span> <%= comp.date.toString().substring(0,16)%> </span>
+                <br />
+                <sapn> <%= comp.description%> </sapn>
+            </p>
+            <h6>Students list</h6>
+            <ul class="list-group">
+                <%for(student of comp.student){%> <%- include('students_list')
+                -%> <%}%>
+            </ul>
 
-<%for(student of comp.student){%> <%- include('students_list') -%> <%}%>
+            <div>
+                <sapn style="font-size: 1.2rem"> Add more candidates </sapn>
+            </div>
+            <form action="/interviews/addCandidate/<%= comp.id%>" method="POST">
+                <label for="student-email">
+                    Students Email:
+                    <input
+                        type="email"
+                        name="email"
+                        id="student-email"
+                        placeholder="Enter student's email"
+                        required
+                    />
+                </label>
+                <input type="submit" value="Submit" placeholder="Submit" />
+            </form>
+        </li>
 
-<form action="/interviews/addCandidate/<%= comp.id%>" method="POST">
-    <label for="student-email">
-        Students Email:
-        <input
-            type="email"
-            name="email"
-            id="student-email"
-            placeholder="Enter student's email"
-            required
-        />
-    </label>
-    <input type="submit" value="Submit" placeholder="Submit" />
-</form>
+        <%}%>
+    </ul>
+</div>

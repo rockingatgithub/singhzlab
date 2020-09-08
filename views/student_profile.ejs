@@ -1,33 +1,47 @@
-<h3><%= student.name%></h3>
-<h4><%= student.email%></h4>
-<h5><%= student.batch%></h5>
-<p>
-    <span
-        >DSA Score: <%if(student.course === undefined){%> 0 <%}else{%> <%=
-        student.course.dsa%> <%}%>
-    </span>
-    <span
-        >WebD Score: <%if(student.course === undefined){%> 0 <%}else{%> <%=
-        student.course.webd%> <%}%>
-    </span>
-    <span
-        >DSA Score: <%if(student.course === undefined){%> 0 <%}else{%> <%=
-        student.course.dsa%> <%}%>
-    </span>
-</p>
+<h3>Students Enrolled</h3>
+<div id="students-list">
+    <ul class="list-group">
+        <%for(student of students){%>
+        <li class="list-group-item">
+            <h4><%= student.name%></h4>
+            <h5><%= student.email%></h5>
+            <h6><%= student.batch%></h6>
+            <p>
+                <span
+                    >DSA Score: <%if(student.course === undefined){%> 0
+                    <%}else{%> <%= student.course.dsa%> <%}%>
+                </span>
+                <span
+                    >WebD Score: <%if(student.course === undefined){%> 0
+                    <%}else{%> <%= student.course.webd%> <%}%>
+                </span>
+                <span
+                    >DSA Score: <%if(student.course === undefined){%> 0
+                    <%}else{%> <%= student.course.dsa%> <%}%>
+                </span>
+            </p>
 
-<form action="/courses/addScore/<%= student.id%>" method="POST">
-    <label for="dsa-score">
-        DSA Score:
-        <input type="number" name="dsa" id="dsa-score" required />
-    </label>
-    <label for="webd-score">
-        WebD Score:
-        <input type="number" name="webd" id="webd-score" required />
-    </label>
-    <label for="react-score">
-        React Score:
-        <input type="number" name="react" id="react-score" required />
-    </label>
-    <input type="submit" value="Submit" placeholder="Submit" />
-</form>
+            <form action="/courses/addScore/<%= student.id%>" method="POST">
+                <label for="dsa-score">
+                    DSA Score:
+                    <input type="number" name="dsa" id="dsa-score" required />
+                </label>
+                <label for="webd-score">
+                    WebD Score:
+                    <input type="number" name="webd" id="webd-score" required />
+                </label>
+                <label for="react-score">
+                    React Score:
+                    <input
+                        type="number"
+                        name="react"
+                        id="react-score"
+                        required
+                    />
+                </label>
+                <input type="submit" value="Submit" placeholder="Submit" />
+            </form>
+        </li>
+        <%}%>
+    </ul>
+</div>

@@ -1,5 +1,7 @@
+const fetch = require('node-fetch')
 const Interview = require('../models/interview')
 const Student = require('../models/student')
+const Result = require('../models/result')
 
 module.exports.create = async function (req, res) {
     try {
@@ -29,9 +31,37 @@ module.exports.addStudent = async function (req, res) {
         student.interview.push(interview.id)
         student.save()
 
+        let result = await Result.create({
+            student: student.id,
+            interview: interview.id,
+            result: 'on hold',
+        })
+
         return res.redirect('back')
     } catch (err) {
         console.log('Error', err)
+        return
+    }
+}
+
+module.exports.getList = async function (req, res) {
+    let companies = await Interview.find({}).populate('student')
+    return res.render('interview_list', {
+        companies: companies,
+    })
+}
+
+module.exports.getOtherList = async function (req, res) {
+    try {
+        let data = await fetch(
+            'https://jobs.github.com/positions.json?location=India'
+        ).then((data) => data.json())
+
+        return res.render('external_joblist', {
+            companies: data,
+        })
+    } catch (err) {
+        console.log('Error is:', err)
         return
     }
 }

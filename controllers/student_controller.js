@@ -22,3 +22,12 @@ module.exports.create = async function (req, res) {
         return
     }
 }
+
+module.exports.getList = async function (req, res) {
+    let students = await Student.find({})
+        .populate('interview')
+        .populate('course')
+    return res.render('student_profile', {
+        students: students,
+    })
+}
