@@ -1,17 +1,17 @@
+// ==================================main index file entry point of app======================================
+
 const express = require('express')
 const app = express()
 const port = 8000
 const cookieParser = require('cookie-parser')
-const loadash = require('lodash')
-
 const expressLayouts = require('express-ejs-layouts')
 const db = require('./config/mongoose')
-
 const session = require('express-session')
 const passport = require('passport')
 const passportLocal = require('./config/passport-local-strategy')
-
 const MongoStore = require('connect-mongo')(session)
+
+// ====================================middlewares below========================================================
 
 app.use(express.urlencoded())
 
@@ -31,7 +31,6 @@ app.set('views', './views')
 app.use(
     session({
         name: 'sanyukt',
-        //todo change secret before deployment..
         secret: 'blahsomething',
         saveUninitialized: false,
         resave: false,
@@ -55,7 +54,8 @@ app.use(passport.session())
 
 app.use(passport.setAuthenticatedUser)
 
-//use the router..after required middlewares called..
+//=================================use the router..after required middlewares called=============================
+
 app.use('/', require('./routes'))
 
 app.listen(port, function (err) {

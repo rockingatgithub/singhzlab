@@ -1,4 +1,6 @@
 const Student = require('../models/student')
+const Result = require('../models/result')
+const Course = require('../models/course')
 
 module.exports.create = async function (req, res) {
     console.log('reached')
@@ -14,6 +16,14 @@ module.exports.create = async function (req, res) {
                 college: req.body.college,
                 status: req.body.status,
             })
+
+            let course = await Course.create({
+                dsa: 0,
+                webd: 0,
+                react: 0,
+                student: student.id,
+            })
+
             return res.redirect('back')
         }
         return res.redirect('back')

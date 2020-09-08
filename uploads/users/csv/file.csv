@@ -1,9 +1,11 @@
 STUDENT ID,NAME,BATCH,COLLEGE,STATUS,DSA SCORE,WEBD SCORE,REACT SCORE,COMPANY,DATE,RESULT
-5f5673dd4d11540d8c669a10,raja,Weekday,amity,placed,100,100,100,google,Tue Sep 15 2020 05:30:00 GMT+0530 (India Standard Time),on hold
-5f5673dd4d11540d8c669a10,raja,Weekday,amity,placed,100,100,100,microsoft,Sun Sep 20 2020 05:30:00 GMT+0530 (India Standard Time),on hold
-5f5673dd4d11540d8c669a10,raja,Weekday,amity,placed,100,100,100,apple,Sat Sep 26 2020 05:30:00 GMT+0530 (India Standard Time),pass
+5f57c7b9f14ed212a0ea0717,sunny,Weekday,honey,placed,200,300,400,google,Tue Sep 15 2020 05:30:00 GMT+0530 (India Standard Time),on hold
+5f5673dd4d11540d8c669a10,raja,Weekday,amity,placed,80,100,100,google,Tue Sep 15 2020 05:30:00 GMT+0530 (India Standard Time),on hold
+5f5673dd4d11540d8c669a10,raja,Weekday,amity,placed,80,100,100,apple,Sat Sep 26 2020 05:30:00 GMT+0530 (India Standard Time),pass
+5f5673dd4d11540d8c669a10,raja,Weekday,amity,placed,80,100,100,microsoft,Sun Sep 20 2020 05:30:00 GMT+0530 (India Standard Time),on hold
 5f5673f04d11540d8c669a11,bholu,Weekday,mgkvp,placed,200,200,200,microsoft,Sun Sep 20 2020 05:30:00 GMT+0530 (India Standard Time),pass
 5f5673f04d11540d8c669a11,bholu,Weekday,mgkvp,placed,200,200,200,apple,Sat Sep 26 2020 05:30:00 GMT+0530 (India Standard Time),pass
 5f5673f04d11540d8c669a11,bholu,Weekday,mgkvp,placed,200,200,200,google,Tue Sep 15 2020 05:30:00 GMT+0530 (India Standard Time),pass
 5f5728088c9fe61c705081bc,muskan,Weekday,pgagati,placed,550,550,550,apple,Sat Sep 26 2020 05:30:00 GMT+0530 (India Standard Time),pass
 5f57c22d7324a9319094b7ee,pappa,Weekend,andar,placed,100,100,100,railways,Wed Sep 23 2020 05:30:00 GMT+0530 (India Standard Time),pass
+5f57c8ec8171210ff8f7d127,raja,Weekday,amity,placed,0,0,0,google,Tue Sep 15 2020 05:30:00 GMT+0530 (India Standard Time),pass

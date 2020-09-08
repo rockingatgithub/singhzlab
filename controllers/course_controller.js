@@ -1,6 +1,9 @@
 const Course = require('../models/course')
 const Student = require('../models/student')
 
+
+// =================================controller to add course info=====================================================
+
 module.exports.create = async function (req, res) {
     try {
         let course = await Course.findOneAndUpdate(
@@ -20,11 +23,10 @@ module.exports.create = async function (req, res) {
                 react: req.body.react,
                 student: req.params.id,
             })
-
-            let student = await Student.findByIdAndUpdate(req.params.id, {
-                course: course.id,
-            })
         }
+        let student = await Student.findByIdAndUpdate(req.params.id, {
+            course: course.id,
+        })
         return res.redirect('back')
     } catch (err) {
         console.log('Error is', err)

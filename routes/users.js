@@ -1,3 +1,5 @@
+// =============================================main file for users routes==============================================
+
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
@@ -15,7 +17,7 @@ router.post(
 router.get('/signout', userController.destroySession)
 
 router.post('/create', userController.create)
-router.get('/createCsv', userController.createCsv)
-router.get('/downloadCsv', userController.downloadCsv)
+router.get('/createCsv', passport.checkAuthentication, userController.createCsv)
+router.get('/downloadCsv', passport.checkAuthentication,userController.downloadCsv)
 
 module.exports = router

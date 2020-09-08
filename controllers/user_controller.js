@@ -1,11 +1,15 @@
 const User = require('../models/user')
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
 const path = require('path')
-// const loadash = require('loadash')
 const Student = require('../models/student')
 const Interview = require('../models/interview')
 const Course = require('../models/course')
 const Result = require('../models/result')
+
+
+
+// =================================controller to sign in the user=====================================================
+
 
 module.exports.signin = function (req, res) {
     if (req.isAuthenticated()) {
@@ -21,7 +25,7 @@ module.exports.signup = function (req, res) {
     return res.render('signup', {})
 }
 
-//to logout users..
+//==============================================to logout users====================================================
 module.exports.destroySession = function (req, res) {
     req.logout()
 
@@ -54,6 +58,9 @@ module.exports.create = async function (req, res) {
         return
     }
 }
+
+// =================================controller to create csv files=====================================================
+
 
 module.exports.createCsv = async function (req, res) {
     try {
@@ -113,9 +120,7 @@ module.exports.createCsv = async function (req, res) {
                         date,
                         result,
                     }
-                    // console.log(obj)
                     newModifiedArray.push(obj)
-                    // console.log(newModifiedArray[newModifiedArray.length - 1])
                     await csvWriter.writeRecords(newModifiedArray)
                 } catch (err) {
                     console.log('Error is', err)

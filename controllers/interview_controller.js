@@ -3,6 +3,10 @@ const Interview = require('../models/interview')
 const Student = require('../models/student')
 const Result = require('../models/result')
 
+
+// =================================controller to add interview info=====================================================
+
+
 module.exports.create = async function (req, res) {
     try {
         let company = await Interview.create({
@@ -17,6 +21,10 @@ module.exports.create = async function (req, res) {
         return
     }
 }
+
+
+// =================================controller to add student to  interview=====================================================
+
 
 module.exports.addStudent = async function (req, res) {
     try {
@@ -43,6 +51,10 @@ module.exports.addStudent = async function (req, res) {
         return
     }
 }
+
+
+// =================================controller to get external jobs info=====================================================
+
 
 module.exports.getList = async function (req, res) {
     let companies = await Interview.find({}).populate('student')

@@ -1,3 +1,5 @@
+// ======================================================course schema and fields======================================
+
 const mongoose = require('mongoose')
 
 const courseSchema = new mongoose.Schema(
