@@ -1,7 +1,8 @@
 const express = require('express')
-const app = express();
-const port = 8000;
+const app = express()
+const port = 8000
 const cookieParser = require('cookie-parser')
+const loadash = require('lodash')
 
 const expressLayouts = require('express-ejs-layouts')
 const db = require('./config/mongoose')
@@ -25,7 +26,6 @@ app.set('layout extractScripts', true)
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
-
 
 //===================================mongo store is used to store the session even after server restarts===========
 app.use(
@@ -58,7 +58,7 @@ app.use(passport.setAuthenticatedUser)
 //use the router..after required middlewares called..
 app.use('/', require('./routes'))
 
-app.listen(port, function(err){
+app.listen(port, function (err) {
     if (err) {
         console.log(`error running server on port: ${port}`)
     }

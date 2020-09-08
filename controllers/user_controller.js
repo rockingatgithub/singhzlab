@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
 const path = require('path')
+// const loadash = require('loadash')
 const Student = require('../models/student')
 const Interview = require('../models/interview')
 const Course = require('../models/course')
@@ -48,29 +49,77 @@ module.exports.create = async function (req, res) {
 }
 
 module.exports.createCsv = async function (req, res) {
-    const csvWriter = createCsvWriter({
-        path: '/uploads/users/csv/file.csv',
-        header: [
-            { id: '_id', title: 'STUDENT ID' },
-            { id: 'name', title: 'NAME' },
-            { id: 'college', title: 'COLLEGE' },
-            { id: 'status', title: 'STATUS' },
-            { id: 'dsa', title: 'DSA SCORE' },
-            { id: 'webd', title: 'WEBD SCORE' },
-            { id: 'react', title: 'REACT SCORE' },
-            { id: 'company', title: 'COMPANY' },
-            { id: 'date', title: 'DATE' },
-            { id: 'result', title: 'RESULT' },
-        ],
-    })
+    try {
+        const csvWriter = createCsvWriter({
+            path: path.join(__dirname, '..', '/uploads/users/csv/file.csv'),
+            headerIdDelimiter: '.',
+            header: [
+                { id: '_id', title: 'STUDENT ID' },
+                { id: 'name', title: 'NAME' },
+                { id: 'batch', title: 'BATCH' },
+                { id: 'college', title: 'COLLEGE' },
+                { id: 'status', title: 'STATUS' },
+                { id: 'dsa', title: 'DSA SCORE' },
+                { id: 'webd', title: 'WEBD SCORE' },
+                { id: 'react', title: 'REACT SCORE' },
+                { id: 'company', title: 'COMPANY' },
+                { id: 'date', title: 'DATE' },
+                { id: 'result', title: 'RESULT' },
+            ],
+        })
 
-    let student = await Student.find({})
-    let interview = await Interview.find({})
-    let course = await Course.find({})
-    let result = await Result.find({})
+        let student = await Student.find({}).populate('interview').populate({
+            path: 'course',
+        })
 
-    csvWriter.writeRecords(student)
-    csvWriter.writeRecords(interview)
-    csvWriter.writeRecords(course)
-    csvWriter.writeRecords(result)
+        let newModifiedArray = []
+        let modifiedArrayObject = student.map(modify)
+        async function modify(student) {
+            student.interview.map(modifyAgain)
+            async function modifyAgain(interviewObj) {
+                let resultObj = await Result.findOne({
+                    student: student._id,
+                    interview: interviewObj._id,
+                })
+
+                let course = await Course.findOne({
+                    student: student._id,
+                })
+
+                const { _id, name, batch, college, status } = student
+                const { dsa, webd, react } = course
+                const { company, date } = interviewObj
+                const { result } = resultObj
+
+                let obj = {
+                    _id,
+                    name,
+                    batch,
+                    college,
+                    status,
+                    dsa,
+                    webd,
+                    react,
+                    company,
+                    date,
+                    result,
+                }
+                // console.log(obj)
+                newModifiedArray.push(obj)
+                // console.log(newModifiedArray[newModifiedArray.length - 1])
+                await csvWriter.writeRecords(newModifiedArray)
+            }
+        }
+
+        return res.redirect('back')
+    } catch (err) {
+        console.log('Error is:', err)
+        return
+    }
+}
+
+module.exports.downloadCsv = async function (req, res) {
+    return res.download(
+        `${path.join(__dirname, '..', '/uploads/users/csv/file.csv')}`
+    )
 }
