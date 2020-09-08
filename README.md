@@ -4,7 +4,7 @@ An webapp which maintains databases for students and their interviews with compa
 
 ## Installation
 
-> Clone the [repo](https://github.com/rockingatgithub/covid_19).
+> Clone the [repo](https://github.com/rockingatgithub/singhzlab).
 > Make sure you have mongodb community edition installed.
 
 Open terminal in project directory and run below command in terminal or cmd.
